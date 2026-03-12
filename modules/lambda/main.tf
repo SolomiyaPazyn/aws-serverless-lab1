@@ -1,0 +1,125 @@
+data "archive_file" "get_all_authors_zip" {
+  type        = "zip"
+  source_file = "${path.module}/src/index.js"
+  output_path = "${path.module}/get-all-authors.zip"
+}
+
+resource "aws_lambda_function" "get_all_authors" {
+  filename         = data.archive_file.get_all_authors_zip.output_path
+  function_name    = "cloudtech-dev-lambda-get-all-authors"
+  role             = var.lambda_role_arn
+  handler          = "index.handler"
+  source_code_hash = data.archive_file.get_all_authors_zip.output_base64sha256
+  runtime          = "nodejs18.x"
+
+  environment {
+    variables = {
+      TABLE_NAME = var.authors_table_name
+    }
+  }
+}
+
+data "archive_file" "get_all_courses_zip" {
+  type        = "zip"
+  source_file = "${path.module}/src/index.js"
+  output_path = "${path.module}/get-all-courses.zip"
+}
+
+resource "aws_lambda_function" "get_all_courses" {
+  filename         = data.archive_file.get_all_courses_zip.output_path
+  function_name    = "cloudtech-dev-lambda-get-all-courses"
+  role             = var.lambda_role_arn
+  handler          = "index.handler"
+  source_code_hash = data.archive_file.get_all_courses_zip.output_base64sha256
+  runtime          = "nodejs18.x"
+
+  environment {
+    variables = {
+      TABLE_NAME = var.courses_table_name
+    }
+  }
+}
+
+data "archive_file" "get_course_zip" {
+  type        = "zip"
+  source_file = "${path.module}/src/index.js"
+  output_path = "${path.module}/get-course.zip"
+}
+
+resource "aws_lambda_function" "get_course" {
+  filename         = data.archive_file.get_course_zip.output_path
+  function_name    = "cloudtech-dev-lambda-get-course"
+  role             = var.lambda_role_arn
+  handler          = "index.handler"
+  source_code_hash = data.archive_file.get_course_zip.output_base64sha256
+  runtime          = "nodejs18.x"
+
+  environment {
+    variables = {
+      TABLE_NAME = var.courses_table_name
+    }
+  }
+}
+
+data "archive_file" "save_course_zip" {
+  type        = "zip"
+  source_file = "${path.module}/src/index.js"
+  output_path = "${path.module}/save-course.zip"
+}
+
+resource "aws_lambda_function" "save_course" {
+  filename         = data.archive_file.save_course_zip.output_path
+  function_name    = "cloudtech-dev-lambda-save-course"
+  role             = var.lambda_role_arn
+  handler          = "index.handler"
+  source_code_hash = data.archive_file.save_course_zip.output_base64sha256
+  runtime          = "nodejs18.x"
+
+  environment {
+    variables = {
+      TABLE_NAME = var.courses_table_name
+    }
+  }
+}
+
+data "archive_file" "update_course_zip" {
+  type        = "zip"
+  source_file = "${path.module}/src/index.js"
+  output_path = "${path.module}/update-course.zip"
+}
+
+resource "aws_lambda_function" "update_course" {
+  filename         = data.archive_file.update_course_zip.output_path
+  function_name    = "cloudtech-dev-lambda-update-course"
+  role             = var.lambda_role_arn
+  handler          = "index.handler"
+  source_code_hash = data.archive_file.update_course_zip.output_base64sha256
+  runtime          = "nodejs18.x"
+
+  environment {
+    variables = {
+      TABLE_NAME = var.courses_table_name
+    }
+  }
+}
+
+data "archive_file" "delete_course_zip" {
+  type        = "zip"
+  source_file = "${path.module}/src/index.js"
+  output_path = "${path.module}/delete-course.zip"
+}
+
+resource "aws_lambda_function" "delete_course" {
+  filename         = data.archive_file.delete_course_zip.output_path
+  function_name    = "cloudtech-dev-lambda-delete-course"
+  role             = var.lambda_role_arn
+  handler          = "index.handler"
+  source_code_hash = data.archive_file.delete_course_zip.output_base64sha256
+  runtime          = "nodejs18.x"
+
+  environment {
+    variables = {
+      TABLE_NAME = var.courses_table_name
+    }
+  }
+}
