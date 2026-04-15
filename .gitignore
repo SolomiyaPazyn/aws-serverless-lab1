@@ -1,12 +1,6 @@
-# React / Node
-node_modules/
-build/
-.env
-.env.local
-npm-debug.log*
-
-# Terraform
 .terraform/
 *.tfstate
 *.tfstate.backup
 .terraform.lock.hcl
+node_modules/
+build/
